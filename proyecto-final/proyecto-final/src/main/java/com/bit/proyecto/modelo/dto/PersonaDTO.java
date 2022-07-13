@@ -1,62 +1,22 @@
-package com.bit.proyecto.modelo;
+package com.bit.proyecto.modelo.dto;
 
-import java.io.Serializable;
-import java.util.Collection;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+public class PersonaDTO {
 
-@Entity
-@Table(name = "PERSONA")
-@NamedQueries({
-    @NamedQuery(name = "Persona.findAll", query = "SELECT p FROM Persona p")})
-public class Persona implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "PER_CODIGO")
     private Integer perCodigo;
-    @Basic(optional = false)
-    @Column(name = "PER_IDENTIFICACION")
     private String perIdentificacion;
-    @Basic(optional = false)
-    @Column(name = "PER_NOMBRE")
     private String perNombre;
-    @Basic(optional = false)
-    @Column(name = "PER_APELLIDO")
     private String perApellido;
-    @Column(name = "PER_DIRECCION")
     private String perDireccion;
-    @Column(name = "PER_TALLA")
     private String perTalla;
-    @Column(name = "PER_FECHA_NACIMIENTO")
     private String perFechaNacimiento;
-    @Column(name = "PER_GENERO")
     private String perGenero;
-    @Column(name = "PER_EMAIL")
     private String perEmail;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "perCodigo")
-    private Collection<Pedido> pedidoCollection;
-
-    public Persona() {
+    
+    public PersonaDTO() {
     }
 
-    public Persona(Integer perCodigo) {
-        this.perCodigo = perCodigo;
-    }
-
-    public Persona(Integer perCodigo, String perIdentificacion, String perNombre, String perApellido, String perDireccion, 
-            String perTalla, String perFechaNacimiento, String perGenero, String perEmail) {
+    public PersonaDTO(Integer perCodigo, String perIdentificacion, String perNombre, String perApellido,
+            String perDireccion, String perTalla, String perFechaNacimiento, String perGenero, String perEmail) {
         this.perCodigo = perCodigo;
         this.perIdentificacion = perIdentificacion;
         this.perNombre = perNombre;
@@ -66,7 +26,6 @@ public class Persona implements Serializable {
         this.perFechaNacimiento = perFechaNacimiento;
         this.perGenero = perGenero;
         this.perEmail = perEmail;
-
     }
 
     public Integer getPerCodigo() {
@@ -141,12 +100,11 @@ public class Persona implements Serializable {
         this.perEmail = perEmail;
     }
 
-    public Collection<Pedido> getPedidoCollection() {
-        return pedidoCollection;
-    }
+    
 
-    public void setPedidoCollection(Collection<Pedido> pedidoCollection) {
-        this.pedidoCollection = pedidoCollection;
-    }
+    
+
+    
+
     
 }
