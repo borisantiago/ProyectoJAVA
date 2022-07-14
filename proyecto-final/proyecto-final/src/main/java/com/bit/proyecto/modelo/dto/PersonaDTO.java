@@ -1,5 +1,10 @@
 package com.bit.proyecto.modelo.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.bit.proyecto.modelo.Pedido;
+
 public class PersonaDTO {
 
     private Integer perCodigo;
@@ -11,7 +16,8 @@ public class PersonaDTO {
     private String perFechaNacimiento;
     private String perGenero;
     private String perEmail;
-    
+    private List<Pedido> pedido = new ArrayList<>();
+
     public PersonaDTO() {
     }
 
@@ -26,6 +32,7 @@ public class PersonaDTO {
         this.perFechaNacimiento = perFechaNacimiento;
         this.perGenero = perGenero;
         this.perEmail = perEmail;
+        
     }
 
     public Integer getPerCodigo() {
@@ -101,7 +108,13 @@ public class PersonaDTO {
     }
 
     
+    public List<Pedido> getPedido(){
+        return pedido;
+    }
 
+    public void setPedido(List<Pedido> pedido){
+        this.pedido = pedido;
+    }
     
 
     

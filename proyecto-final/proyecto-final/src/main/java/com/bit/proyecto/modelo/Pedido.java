@@ -1,8 +1,10 @@
 package com.bit.proyecto.modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
+import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,17 +18,13 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 
 @Entity
 @Table(name = "PEDIDO")
-@NamedQueries({
-    @NamedQuery(name = "Pedido.findAll", query = "SELECT p FROM Pedido p")})
-public class Pedido implements Serializable {
+public class Pedido {
 
-    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -34,8 +32,7 @@ public class Pedido implements Serializable {
     private Integer pedCodigo;
     @Basic(optional = false)
     @Column(name = "PED_FECHA")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date pedFecha;
+    private String pedFecha;
     @Column(name = "PED_OBSERVACION")
     private String pedObservacion;
     @Column(name = "PED_ESTADO")
@@ -48,25 +45,30 @@ public class Pedido implements Serializable {
     private String pedFactura;
     @Column(name = "PED_IVA")
     private Double pedIva;
-    @JoinColumn(name = "PER_CODIGO", referencedColumnName = "PER_CODIGO")
-    @ManyToOne(optional = false)
-    private Persona perCodigo;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pedCodigo")
-    private Collection<Entrega> entregaCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pedCodigo")
-    private Collection<DetallePedido> detallePedidoCollection;
+    
+    @Column(name = "PER_CODIGO")
+    private Integer perCodigo;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "PED_CODIGO", referencedColumnName = "PED_CODIGO")
+    private List<Entrega> entrega = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "PED_CODIGO", referencedColumnName = "PED_CODIGO")
+    private List<DetallePedido> detallePedido = new ArrayList<>();
 
     public Pedido() {
     }
 
-    public Pedido(Integer pedCodigo) {
-        this.pedCodigo = pedCodigo;
-    }
-
-    public Pedido(Integer pedCodigo, Date pedFecha, String pedFactura) {
+    public Pedido(Integer pedCodigo, String pedFecha, String pedObservacion, String pedEstado, Double pedSubtotal, String pedFactura, Double pedIva, Integer perCodigo) {
         this.pedCodigo = pedCodigo;
         this.pedFecha = pedFecha;
+        this.pedObservacion = pedObservacion;
+        this.pedEstado = pedEstado;
+        this.pedSubtotal = pedSubtotal;
         this.pedFactura = pedFactura;
+        this.pedIva = pedIva;
+        this.perCodigo = perCodigo;
     }
 
     public Integer getPedCodigo() {
@@ -77,11 +79,11 @@ public class Pedido implements Serializable {
         this.pedCodigo = pedCodigo;
     }
 
-    public Date getPedFecha() {
+    public String getPedFecha() {
         return pedFecha;
     }
 
-    public void setPedFecha(Date pedFecha) {
+    public void setPedFecha(String pedFecha) {
         this.pedFecha = pedFecha;
     }
 
@@ -125,30 +127,28 @@ public class Pedido implements Serializable {
         this.pedIva = pedIva;
     }
 
-    public Persona getPerCodigo() {
+    public Integer getPerCodigo() {
         return perCodigo;
     }
 
-    public void setPerCodigo(Persona perCodigo) {
+    public void setPerCodigo(Integer perCodigo) {
         this.perCodigo = perCodigo;
     }
 
-    public Collection<Entrega> getEntregaCollection() {
-        return entregaCollection;
+    public List<Entrega> getEntrega() {
+        return entrega;
     }
 
-    public void setEntregaCollection(Collection<Entrega> entregaCollection) {
-        this.entregaCollection = entregaCollection;
+    public void setEntrega(List<Entrega> entrega) {
+        this.entrega = entrega;
     }
 
-    public Collection<DetallePedido> getDetallePedidoCollection() {
-        return detallePedidoCollection;
+    public List<DetallePedido> getDetallePedido() {
+        return detallePedido;
     }
 
-    public void setDetallePedidoCollection(Collection<DetallePedido> detallePedidoCollection) {
-        this.detallePedidoCollection = detallePedidoCollection;
+    public void setDetallePedido(List<DetallePedido> detallePedido) {
+        this.detallePedido = detallePedido;
     }
-
-    
     
 }

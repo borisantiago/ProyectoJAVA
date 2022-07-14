@@ -1,61 +1,26 @@
-package com.bit.proyecto.modelo;
+package com.bit.proyecto.modelo.dto;
 
-import java.io.Serializable;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.PrePersist;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
-
-@Entity
-@Table(name = "ENTREGA")
-@NamedQueries({
-    @NamedQuery(name = "Entrega.findAll", query = "SELECT e FROM Entrega e")})
-public class Entrega implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "ENT_CODIGO")
-    private Integer entCodigo;
-    @Column(name = "ENT_DESCRIPCION")
-    private String entDescripcion;
-    @Column(name = "ENT_RECIBE")
-    private String entRecibe;
-    @Column(name = "ENT_OBSERVACION")
-    private String entObservacion;
-    @Column(name = "ENT_FECHA_ENVIO")
-    private String entFechaEnvio;
-    @Column(name = "ENT_FECHA_RECIBE")
-    private String entFechaRecibe;
-    @Basic(optional = false)
-    @Column(name = "ENT_ESTADO")
-    private String entEstado;
+public class EntregaDTO {
     
-    @Column(name = "PED_CODIGO")
+    private Integer entCodigo;
+    private String entDescripcion;
+    private String entRecibe;
+    private String entObservacion;
+    private String entFechaEnvio;
+    private String entEstado;
     private Integer pedCodigo;
-
-    public Entrega() {
+    
+    public EntregaDTO() {
     }
 
-    public Entrega(Integer entCodigo, String entDescripcion, String entRecibe, String entObservacion, String entEstado, String entFechaEnvio, Integer pedCodigo) {
+    public EntregaDTO(Integer entCodigo, String entDescripcion, String entRecibe, String entObservacion,
+            String entFechaEnvio, String entEstado, Integer pedCodigo) {
         this.entCodigo = entCodigo;
         this.entDescripcion = entDescripcion;
         this.entRecibe = entRecibe;
         this.entObservacion = entObservacion;
-        this.entEstado = entEstado;
         this.entFechaEnvio = entFechaEnvio;
+        this.entEstado = entEstado;
         this.pedCodigo = pedCodigo;
     }
 
@@ -99,14 +64,6 @@ public class Entrega implements Serializable {
         this.entFechaEnvio = entFechaEnvio;
     }
 
-    public String getEntFechaRecibe() {
-        return entFechaRecibe;
-    }
-
-    public void setEntFechaRecibe(String entFechaRecibe) {
-        this.entFechaRecibe = entFechaRecibe;
-    }
-
     public String getEntEstado() {
         return entEstado;
     }
@@ -123,8 +80,12 @@ public class Entrega implements Serializable {
         this.pedCodigo = pedCodigo;
     }
 
-   
+    
 
     
+
     
+
+
+
 }

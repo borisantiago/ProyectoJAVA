@@ -1,7 +1,10 @@
 package com.bit.proyecto.modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -9,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -45,14 +49,21 @@ public class Persona implements Serializable {
     private String perGenero;
     @Column(name = "PER_EMAIL")
     private String perEmail;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "perCodigo")
-    private Collection<Pedido> pedidoCollection;
+    
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "PER_CODIGO", referencedColumnName = "PER_CODIGO")
+    private List<Pedido> pedido= new ArrayList<>();
 
-    public Persona() {
+    /*Pedido */
+    public List<Pedido> getPedido() {
+        return pedido;
     }
 
-    public Persona(Integer perCodigo) {
-        this.perCodigo = perCodigo;
+    public void setPedido(List<Pedido> pedido) {
+        this.pedido = pedido;
+    }
+
+    public Persona() {
     }
 
     public Persona(Integer perCodigo, String perIdentificacion, String perNombre, String perApellido, String perDireccion, 
@@ -66,7 +77,6 @@ public class Persona implements Serializable {
         this.perFechaNacimiento = perFechaNacimiento;
         this.perGenero = perGenero;
         this.perEmail = perEmail;
-
     }
 
     public Integer getPerCodigo() {
@@ -141,12 +151,6 @@ public class Persona implements Serializable {
         this.perEmail = perEmail;
     }
 
-    public Collection<Pedido> getPedidoCollection() {
-        return pedidoCollection;
-    }
-
-    public void setPedidoCollection(Collection<Pedido> pedidoCollection) {
-        this.pedidoCollection = pedidoCollection;
-    }
+    
     
 }

@@ -50,11 +50,8 @@ public class Zapato implements Serializable {
     public Zapato() {
     }
 
-    public Zapato(String zapCodigo) {
-        this.zapCodigo = zapCodigo;
-    }
-
-    public Zapato(String zapCodigo, String zapNombre, String zapModelo, String zapGenero, String zapColor, String zapTalla, int zapStock) {
+    public Zapato(String zapCodigo, String zapNombre, String zapModelo, String zapGenero, String zapColor, 
+            String zapTalla, int zapStock, Double zapPrecio) {
         this.zapCodigo = zapCodigo;
         this.zapNombre = zapNombre;
         this.zapModelo = zapModelo;
@@ -62,6 +59,7 @@ public class Zapato implements Serializable {
         this.zapColor = zapColor;
         this.zapTalla = zapTalla;
         this.zapStock = zapStock;
+        this.zapPrecio = zapPrecio;
     }
 
     public String getZapCodigo() {

@@ -1,62 +1,22 @@
-package com.bit.proyecto.modelo;
+package com.bit.proyecto.modelo.dto;
 
-import java.io.Serializable;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-
-
-@Entity
-@Table(name = "DETALLE_PEDIDO")
-@NamedQueries({
-    @NamedQuery(name = "DetallePedido.findAll", query = "SELECT d FROM DetallePedido d")})
-public class DetallePedido implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "DEP_CODIGO")
+public class DetallePedidoDTO {
+    
     private Integer depCodigo;
-    @Basic(optional = false)
-    @Column(name = "DEP_CANTIDAD")
     private int depCantidad;
-    @Basic(optional = false)
-    @Column(name = "DEP_PRECIO")
     private double depPrecio;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "DEP_DESCUENTO")
     private Double depDescuento;
-    @Column(name = "DEP_IVA")
     private Double depIva;
-    @Column(name = "DEP_SUBTOTAL")
     private Double depSubtotal;
-    @Column(name = "DEP_OBSERVACION")
     private String depObservacion;
-
-    @Column(name = "PED_CODIGO")
     private Integer pedCodigo;
-
-    @Column(name = "ZAP_CODIGO") 
     private String zapCodigo;
-
-    public DetallePedido() {
+    
+    public DetallePedidoDTO() {
     }
 
-    public DetallePedido(Integer depCodigo) {
-        this.depCodigo = depCodigo;
-    }
-
-    public DetallePedido(Integer depCodigo, int depCantidad, double depPrecio, Double depDescuento, Double depIva,
-    Double depSubtotal, String depObservacion, Integer pedCodigo, String zapCodigo) {
+    public DetallePedidoDTO(Integer depCodigo, int depCantidad, double depPrecio, Double depDescuento, Double depIva,
+            Double depSubtotal, String depObservacion, Integer pedCodigo, String zapCodigo) {
         this.depCodigo = depCodigo;
         this.depCantidad = depCantidad;
         this.depPrecio = depPrecio;
@@ -141,5 +101,9 @@ public class DetallePedido implements Serializable {
     }
 
     
+
     
+
+    
+
 }

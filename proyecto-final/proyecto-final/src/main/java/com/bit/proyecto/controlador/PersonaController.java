@@ -9,12 +9,11 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bit.proyecto.modelo.Persona;
 import com.bit.proyecto.modelo.dto.PersonaDTO;
 import com.bit.proyecto.servicio.PersonaRepository;
 
@@ -26,9 +25,14 @@ public class PersonaController {
     private PersonaRepository repository;
 
     @GetMapping("/todos")
-    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<PersonaDTO>> personas(){
         List<PersonaDTO> personas = repository.buscarTodos();
+        return new ResponseEntity<>(personas, HttpStatus.OK);
+    }
+
+    @GetMapping("/todos2")
+    public ResponseEntity<List<Persona>> personas2(){
+        List<Persona> personas = repository.buscarTodos2();
         return new ResponseEntity<>(personas, HttpStatus.OK);
     }
 
@@ -44,16 +48,18 @@ public class PersonaController {
         return new ResponseEntity<>(personaDTO, HttpStatus.CREATED);
     }
 
-    @PutMapping("/actualizar/{id}")
-    public ResponseEntity<?> actualizarPersona(@PathVariable("id") Integer perCodigo, @RequestBody PersonaDTO personaDTO){
+    @PostMapping("/actualizar")
+    public ResponseEntity<?> actualizarPersona(@RequestBody PersonaDTO personaDTO){
         
         PersonaDTO per = repository.actualizarPersona(personaDTO);
         return new ResponseEntity<>(per, HttpStatus.OK);
-
     }
 
-    
-
+    @DeleteMapping("/eliminar/{id}")
+    public ResponseEntity<String> eliminarPersona(@PathVariable("id") Integer id){
+        repository.eliminarPersona(id);
+        return new ResponseEntity<>("Se elimino correctamente", HttpStatus.OK);
+    }
     
     
 }

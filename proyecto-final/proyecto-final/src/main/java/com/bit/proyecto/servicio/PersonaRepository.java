@@ -25,8 +25,12 @@ public class PersonaRepository {
         return dtos;
     } 
 
+    public List<Persona> buscarTodos2(){
+        return (List<Persona>) repository.findAll();
+    }
+
     public PersonaDTO buscarUnico(Integer id){
-        Persona per = repository.findById(id).orElseThrow(()-> new PersonaException(" no se encontro la persona"));
+        Persona per = repository.findById(id).orElseThrow(()-> new PersonaException("no se encontro la persona"));
         return this.getDTO(per);
     } 
 
@@ -35,13 +39,21 @@ public class PersonaRepository {
         return this.getDTO(per);
     }
 
+    public void guardarPersona2(Persona p){
+        repository.save(p);
+    }
+
     public PersonaDTO actualizarPersona(PersonaDTO p){
-        Persona per = repository.findById(p.getPerCodigo()).orElseThrow(()-> new PersonaException(" Persona no encontrada"));
+        Persona per = repository.findById(p.getPerCodigo()).orElseThrow(()-> new PersonaException("persona no encontrada"));
         repository.save(this.getEntidad(p));
         return this.getDTO(per);
     }
-    
 
+    public void eliminarPersona(Integer id){
+        repository.findById(id).orElseThrow(()-> new PersonaException("no se encontro la peronsa con codigo"));
+        repository.deleteById(id);
+    }
+    
 
     private PersonaDTO getDTO(Persona p){
         return new PersonaDTO(p.getPerCodigo(), p.getPerIdentificacion(), p.getPerNombre(), p.getPerApellido(), p.getPerDireccion(), 
