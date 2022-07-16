@@ -17,7 +17,7 @@ public class PersonaRepository {
     @Autowired
     private PersonaDao repository;
 
-    public List<PersonaDTO> buscarTodos(){
+    public List<PersonaDTO> buscarTodos2(){
         List<PersonaDTO> dtos = new ArrayList<>();
         for(Persona p: repository.findAll()){
             dtos.add(this.getDTO(p));
@@ -25,14 +25,21 @@ public class PersonaRepository {
         return dtos;
     } 
 
-    public List<Persona> buscarTodos2(){
+    public List<Persona> buscarTodos(){
         return (List<Persona>) repository.findAll();
     }
 
-    public PersonaDTO buscarUnico(Integer id){
+    public Persona buscarUnico(Integer id){
+        Persona per = repository.findById(id).orElseThrow(()-> new PersonaException("no se encontro la persona"));
+        return per;
+    } 
+
+    public PersonaDTO buscarUnicoDTO(Integer id){
         Persona per = repository.findById(id).orElseThrow(()-> new PersonaException("no se encontro la persona"));
         return this.getDTO(per);
     } 
+
+    
 
     public PersonaDTO guardarPersona(PersonaDTO p){
         Persona per = repository.save(this.getEntidad(p));

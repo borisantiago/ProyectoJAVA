@@ -4,18 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.bit.proyecto.dao.DetallePedidoDao;
 import com.bit.proyecto.exception.DetallePedidoException;
 import com.bit.proyecto.modelo.DetallePedido;
 import com.bit.proyecto.modelo.dto.DetallePedidoDTO;
 
+@Repository
 public class DetallePedidoRepository {
 
     @Autowired
     private DetallePedidoDao repository;
 
-    public List<DetallePedidoDTO> buscarTodos(){
+    public List<DetallePedidoDTO> buscarTodosDTO(){
         List<DetallePedidoDTO> dtos = new ArrayList<>();
         for(DetallePedido p: repository.findAll()){
             dtos.add(this.getDTO(p));
@@ -23,11 +25,16 @@ public class DetallePedidoRepository {
         return dtos;
     } 
 
-    public List<DetallePedido> buscarTodos2(){
+    public List<DetallePedido> buscarTodos(){
         return (List<DetallePedido>) repository.findAll();
     }
 
-    public DetallePedidoDTO buscarUnico(Integer id){
+    public DetallePedido buscarUnico(Integer id){
+        DetallePedido per = repository.findById(id).orElseThrow(()-> new DetallePedidoException("no se encontro la DetallePedido"));
+        return per;
+    } 
+
+    public DetallePedidoDTO buscarUnicoDTO(Integer id){
         DetallePedido per = repository.findById(id).orElseThrow(()-> new DetallePedidoException("no se encontro la DetallePedido"));
         return this.getDTO(per);
     } 

@@ -17,13 +17,17 @@ public class PedidoRepository {
     @Autowired
     private PedidoDao repository;
 
-    public List<PedidoDTO> buscarTodos(){
+    public List<PedidoDTO> buscarTodos2(){
         List<PedidoDTO> dtos = new ArrayList<>();
         for(Pedido p: repository.findAll()){
             dtos.add(this.getDTO(p));
         }
         return dtos;
     } 
+
+    public List<Pedido> buscarTodos(){
+        return (List<Pedido>) repository.findAll();
+    }
 
     public PedidoDTO buscarUnico(Integer id){
         Pedido pedido = repository.findById(id).orElseThrow(()-> new PedidoException("no se encontro la Pedido"));
@@ -38,10 +42,6 @@ public class PedidoRepository {
     public void guardarPedido2(Pedido p){
         repository.save(p);
          
-    }
-
-    public List<PedidoDTO> buscarTodos2() {
-        return null;
     }
     
 

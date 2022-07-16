@@ -11,11 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bit.proyecto.modelo.Pedido;
-import com.bit.proyecto.modelo.Persona;
 import com.bit.proyecto.modelo.dto.PedidoDTO;
 import com.bit.proyecto.servicio.PedidoRepository;
 
@@ -28,8 +26,14 @@ public class PedidoController {
     private PedidoRepository repository;
 
     @GetMapping("/todos")
+    public ResponseEntity<List<Pedido>> pedidosLista(){
+        List<Pedido> pedidos = repository.buscarTodos();
+        return new ResponseEntity<>(pedidos, HttpStatus.OK);
+    }
+    
+    @GetMapping("/todosDTO")
     public ResponseEntity<List<PedidoDTO>> pedidos(){
-        List<PedidoDTO> pedidos = repository.buscarTodos();
+        List<PedidoDTO> pedidos = repository.buscarTodos2();
         return new ResponseEntity<>(pedidos, HttpStatus.OK);
     }
 

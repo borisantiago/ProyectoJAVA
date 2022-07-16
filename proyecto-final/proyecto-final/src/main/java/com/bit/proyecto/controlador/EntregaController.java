@@ -13,54 +13,54 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bit.proyecto.modelo.Persona;
-import com.bit.proyecto.modelo.dto.PersonaDTO;
-import com.bit.proyecto.servicio.PersonaRepository;
+import com.bit.proyecto.modelo.Entrega;
+import com.bit.proyecto.modelo.dto.EntregaDTO;
+import com.bit.proyecto.servicio.EntregaRepository;
 
 @RestController
-@RequestMapping("/persona")
-public class PersonaController {
+@RequestMapping("/entrega")
+public class EntregaController {
 
     @Autowired
-    private PersonaRepository repository;
-
+    private EntregaRepository repository;
 
     @GetMapping("/todos")
-    public ResponseEntity<List<Persona>> todosPersonas(){
-        List<Persona> personas = repository.buscarTodos();
-        return new ResponseEntity<>(personas, HttpStatus.OK);
+    public ResponseEntity<List<Entrega>> todosEntrega(){
+        List<Entrega> entrega = repository.buscarTodos();
+        return new ResponseEntity<>(entrega, HttpStatus.OK);
     }
 
     @GetMapping("id/{id}")
-    public ResponseEntity<PersonaDTO> buscarUnicoDTO(@PathVariable Integer id){
-        PersonaDTO per = repository.buscarUnicoDTO(id);
+    public ResponseEntity<EntregaDTO> buscarUnicoDTO(@PathVariable Integer id){
+        EntregaDTO per = repository.buscarUnicoDTO(id);
         return new ResponseEntity<>(per, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Persona> buscarUnico(@PathVariable Integer id){
-        Persona per = repository.buscarUnico(id);
+    public ResponseEntity<Entrega> buscarUnico(@PathVariable Integer id){
+        Entrega per = repository.buscarUnico(id);
         return new ResponseEntity<>(per, HttpStatus.OK);
     }
 
     @PostMapping("/agregar")
-    public ResponseEntity<?> crearPersona(@RequestBody PersonaDTO personaDTO){
-        repository.guardarPersona(personaDTO);
+    public ResponseEntity<?> crearPersona(@RequestBody EntregaDTO personaDTO){
+        repository.guardarEntrega(personaDTO);
         return new ResponseEntity<>(personaDTO, HttpStatus.CREATED);
     }
 
     @PostMapping("/actualizar")
-    public ResponseEntity<?> actualizarPersona(@RequestBody PersonaDTO personaDTO){
+    public ResponseEntity<?> actualizarPersona(@RequestBody EntregaDTO entregaDTO){
         
-        PersonaDTO per = repository.actualizarPersona(personaDTO);
+        EntregaDTO per = repository.actualizarEntrega(entregaDTO);
         return new ResponseEntity<>(per, HttpStatus.OK);
     }
 
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<String> eliminarPersona(@PathVariable("id") Integer id){
-        repository.eliminarPersona(id);
+        repository.eliminarEntrega(id);
         return new ResponseEntity<>("Se elimino correctamente", HttpStatus.OK);
     }
+
     
     
 }
