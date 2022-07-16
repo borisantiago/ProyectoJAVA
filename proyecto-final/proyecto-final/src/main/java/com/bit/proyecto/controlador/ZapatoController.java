@@ -11,11 +11,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bit.proyecto.modelo.Zapato;
 import com.bit.proyecto.modelo.dto.ZapatoDTO;
+import com.bit.proyecto.rest.Output;
 import com.bit.proyecto.servicio.ZapatoRepository;
 
 @RestController
@@ -24,6 +26,26 @@ public class ZapatoController {
     
     @Autowired
     private ZapatoRepository repository;
+
+  
+    @GetMapping("/catalogo2/{genero}")
+    public ResponseEntity<List<ZapatoDTO>> getCatalogo2(@PathVariable String genero){
+        List<ZapatoDTO> zaps = repository.buscarFiltrado(genero);
+        return new ResponseEntity<>(zaps, HttpStatus.OK);
+
+    }
+
+
+    //catalogo busqueda por genero
+    @GetMapping("/catalogo")
+    public Output getCatalogo(@RequestParam("genero") String genero){
+        Output salida = new Output();
+        salida.setCodigo("0");
+        salida.setMensaje("Peticion procesada con exito");
+        salida.setEntidad(repository.buscarFiltrado(genero));
+
+        return salida;
+    }
 
     @GetMapping("/todosDTO")
     @ResponseStatus(HttpStatus.OK)
@@ -67,7 +89,5 @@ public class ZapatoController {
         repository.eliminarZapato(id);
         return new ResponseEntity<>("Se elimino correctamente", HttpStatus.OK);
     }
-
-
 
 }

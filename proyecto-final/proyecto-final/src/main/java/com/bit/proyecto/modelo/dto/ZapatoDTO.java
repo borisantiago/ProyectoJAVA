@@ -8,14 +8,14 @@ public class ZapatoDTO {
     private String zapGenero;
     private String zapColor;
     private String zapTalla;
-    private int zapStock;
+    private Integer zapStock;
     private Double zapPrecio;
    
     public ZapatoDTO() {
     }
 
     public ZapatoDTO(String zapCodigo, String zapNombre, String zapModelo, String zapGenero, String zapColor,
-            String zapTalla, int zapStock, Double zapPrecio) {
+            String zapTalla, Integer zapStock, Double zapPrecio) {
         this.zapCodigo = zapCodigo;
         this.zapNombre = zapNombre;
         this.zapModelo = zapModelo;
@@ -74,11 +74,11 @@ public class ZapatoDTO {
         this.zapTalla = zapTalla;
     }
 
-    public int getZapStock() {
+    public Integer getZapStock() {
         return zapStock;
     }
 
-    public void setZapStock(int zapStock) {
+    public void setZapStock(Integer zapStock) {
         this.zapStock = zapStock;
     }
 

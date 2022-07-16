@@ -41,7 +41,7 @@ public class Zapato implements Serializable {
     private String zapTalla;
     @Basic(optional = false)
     @Column(name = "ZAP_STOCK")
-    private int zapStock;
+    private Integer zapStock;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "ZAP_PRECIO")
     private Double zapPrecio;
@@ -62,7 +62,7 @@ public class Zapato implements Serializable {
     }
 
     public Zapato(String zapCodigo, String zapNombre, String zapModelo, String zapGenero, String zapColor, 
-            String zapTalla, int zapStock, Double zapPrecio) {
+            String zapTalla, Integer zapStock, Double zapPrecio) {
         this.zapCodigo = zapCodigo;
         this.zapNombre = zapNombre;
         this.zapModelo = zapModelo;
@@ -121,11 +121,11 @@ public class Zapato implements Serializable {
         this.zapTalla = zapTalla;
     }
 
-    public int getZapStock() {
+    public Integer getZapStock() {
         return zapStock;
     }
 
-    public void setZapStock(int zapStock) {
+    public void setZapStock(Integer zapStock) {
         this.zapStock = zapStock;
     }
 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Repository;
 
 import com.bit.proyecto.dao.ZapatoDao;
@@ -16,6 +17,19 @@ public class ZapatoRepository {
 
     @Autowired
     private ZapatoDao repository;
+
+
+    //Filtrar por genero
+    public List<ZapatoDTO> buscarFiltrado(String genero){
+        ZapatoDTO plantilla = new ZapatoDTO();
+        plantilla.setZapGenero(genero);
+        Zapato pla = this.getEntidad(plantilla);
+        List<ZapatoDTO> dtos = new ArrayList<>();
+        for(Zapato z: repository.findAll(Example.of(pla))){
+            dtos.add(this.getDTO(z));
+        }
+        return dtos;
+    }
 
     public List<ZapatoDTO> listarZapatosDTO(){
         List<ZapatoDTO> dtos = new ArrayList<>();

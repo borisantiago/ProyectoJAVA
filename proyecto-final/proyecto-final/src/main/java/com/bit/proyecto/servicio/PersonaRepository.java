@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import com.bit.proyecto.dao.PersonaDao;
 import com.bit.proyecto.exception.PersonaException;
 import com.bit.proyecto.modelo.Persona;
@@ -61,12 +60,12 @@ public class PersonaRepository {
     
     private PersonaDTO getDTO(Persona p){
         return new PersonaDTO(p.getPerCodigo(), p.getPerIdentificacion(), p.getPerNombre(), p.getPerApellido(), p.getPerDireccion(), 
-        p.getPerTalla(), p.getPerFechaNacimiento(), p.getPerGenero(), p.getPerEmail());
+                p.getPerTalla(), p.getPerFechaNacimiento(), p.getPerGenero(), p.getPerEmail());
     }
 
     private Persona getEntidad(PersonaDTO p){
         return new Persona(p.getPerCodigo(), p.getPerIdentificacion(), p.getPerNombre(), p.getPerApellido(), p.getPerDireccion(), 
-            p.getPerTalla(), p.getPerFechaNacimiento(), p.getPerGenero(), p.getPerEmail());
+                p.getPerTalla(), p.getPerFechaNacimiento(), p.getPerGenero(), p.getPerEmail());
     }
 
 
