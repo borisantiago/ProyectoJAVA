@@ -65,8 +65,15 @@ public class DetallePedidoRepository {
     }
 
     private DetallePedido getEntidad(DetallePedidoDTO p){
-        return new DetallePedido(p.getDepCodigo(), p.getDepCantidad(), p.getDepPrecio(), p.getDepDescuento(), p.getDepIva(), p.getDepSubtotal(), p.getDepObservacion(), p.getPedCodigo(), p.getZapCodigo());
+        
+        Double cantPre = (p.getDepCantidad() * p.getDepPrecio());
+        Double descuneto = cantPre * p.getDepDescuento()/100;
+        Double cantPreDesc = cantPre - descuneto; 
+        Double iva = cantPreDesc * (p.getDepIva()/100);
+        Double subT = cantPreDesc + iva;
+        
+        return new DetallePedido(p.getDepCodigo(), p.getDepCantidad(), p.getDepPrecio(), p.getDepDescuento(), p.getDepIva(), subT, p.getDepObservacion(), p.getPedCodigo(), p.getZapCodigo());
     }
 
-    
+
 }

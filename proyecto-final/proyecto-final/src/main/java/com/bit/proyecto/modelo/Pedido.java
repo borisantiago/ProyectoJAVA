@@ -3,6 +3,7 @@ package com.bit.proyecto.modelo;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Basic;
@@ -14,7 +15,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 @Entity
@@ -29,7 +33,8 @@ public class Pedido {
     private Integer pedCodigo;
     @Basic(optional = false)
     @Column(name = "PED_FECHA")
-    private String pedFecha;
+    @Temporal(TemporalType.DATE)
+    private Date pedFecha;
     @Column(name = "PED_OBSERVACION")
     private String pedObservacion;
     @Column(name = "PED_ESTADO")
@@ -54,10 +59,15 @@ public class Pedido {
     @JoinColumn(name = "PED_CODIGO", referencedColumnName = "PED_CODIGO")
     private List<DetallePedido> detallePedido = new ArrayList<>();
 
+    @PrePersist
+    public void prePerisist(){
+        pedFecha = new Date();
+    } 
+
     public Pedido() {
     }
 
-    public Pedido(Integer pedCodigo, String pedFecha, String pedObservacion, String pedEstado, Double pedSubtotal, String pedFactura, Double pedIva, Integer perCodigo) {
+    public Pedido(Integer pedCodigo, Date pedFecha, String pedObservacion, String pedEstado, Double pedSubtotal, String pedFactura, Double pedIva, Integer perCodigo) {
         this.pedCodigo = pedCodigo;
         this.pedFecha = pedFecha;
         this.pedObservacion = pedObservacion;
@@ -76,11 +86,11 @@ public class Pedido {
         this.pedCodigo = pedCodigo;
     }
 
-    public String getPedFecha() {
+    public Date getPedFecha() {
         return pedFecha;
     }
 
-    public void setPedFecha(String pedFecha) {
+    public void setPedFecha(Date pedFecha) {
         this.pedFecha = pedFecha;
     }
 

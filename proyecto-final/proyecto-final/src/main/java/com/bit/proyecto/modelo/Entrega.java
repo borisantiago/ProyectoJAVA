@@ -1,6 +1,8 @@
 package com.bit.proyecto.modelo;
 
 import java.io.Serializable;
+import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -36,9 +38,9 @@ public class Entrega implements Serializable {
     @Column(name = "ENT_OBSERVACION")
     private String entObservacion;
     @Column(name = "ENT_FECHA_ENVIO")
-    private String entFechaEnvio;
+    private Date entFechaEnvio;
     @Column(name = "ENT_FECHA_RECIBE")
-    private String entFechaRecibe;
+    private Date entFechaRecibe;
     @Basic(optional = false)
     @Column(name = "ENT_ESTADO")
     private String entEstado;
@@ -49,13 +51,13 @@ public class Entrega implements Serializable {
     public Entrega() {
     }
 
-    public Entrega(Integer entCodigo, String entDescripcion, String entRecibe, String entObservacion, String entEstado, String entFechaEnvio, Integer pedCodigo) {
+    public Entrega(Integer entCodigo, String entDescripcion, String entRecibe, String entObservacion, String entEstado, Integer pedCodigo) {
         this.entCodigo = entCodigo;
         this.entDescripcion = entDescripcion;
         this.entRecibe = entRecibe;
         this.entObservacion = entObservacion;
         this.entEstado = entEstado;
-        this.entFechaEnvio = entFechaEnvio;
+        //this.entFechaEnvio = entFechaEnvio;
         this.pedCodigo = pedCodigo;
     }
 
@@ -91,19 +93,19 @@ public class Entrega implements Serializable {
         this.entObservacion = entObservacion;
     }
 
-    public String getEntFechaEnvio() {
+    public Date getEntFechaEnvio() {
         return entFechaEnvio;
     }
 
-    public void setEntFechaEnvio(String entFechaEnvio) {
+    public void setEntFechaEnvio(Date entFechaEnvio) {
         this.entFechaEnvio = entFechaEnvio;
     }
 
-    public String getEntFechaRecibe() {
+    public Date getEntFechaRecibe() {
         return entFechaRecibe;
     }
 
-    public void setEntFechaRecibe(String entFechaRecibe) {
+    public void setEntFechaRecibe(Date entFechaRecibe) {
         this.entFechaRecibe = entFechaRecibe;
     }
 
@@ -125,6 +127,4 @@ public class Entrega implements Serializable {
 
    
 
-    
-    
 }

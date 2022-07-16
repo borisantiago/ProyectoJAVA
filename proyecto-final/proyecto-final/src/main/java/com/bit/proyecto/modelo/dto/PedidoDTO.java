@@ -1,5 +1,6 @@
 package com.bit.proyecto.modelo.dto;
 
+import java.util.Date;
 import java.util.List;
 
 import com.bit.proyecto.modelo.DetallePedido;
@@ -8,7 +9,7 @@ import com.bit.proyecto.modelo.Entrega;
 public class PedidoDTO {
     
     private Integer pedCodigo;
-    private String pedFecha;
+    private Date pedFecha;
     private String pedObservacion;
     private String pedEstado;
     private Double pedSubtotal;
@@ -23,7 +24,7 @@ public class PedidoDTO {
     public PedidoDTO() {
     }
 
-    public PedidoDTO(Integer pedCodigo, String pedFecha, String pedObservacion, String pedEstado, Double pedSubtotal, String pedFactura,
+    public PedidoDTO(Integer pedCodigo, Date pedFecha, String pedObservacion, String pedEstado, Double pedSubtotal, String pedFactura,
             Double pedIva, Integer perCodigo) {
         this.pedCodigo = pedCodigo;
         this.pedFecha = pedFecha;
@@ -44,11 +45,11 @@ public class PedidoDTO {
         this.pedCodigo = pedCodigo;
     }
 
-    public String getPedFecha() {
+    public Date getPedFecha() {
         return pedFecha;
     }
 
-    public void setPedFecha(String pedFecha) {
+    public void setPedFecha(Date pedFecha) {
         this.pedFecha = pedFecha;
     }
 

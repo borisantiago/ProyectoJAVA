@@ -7,6 +7,10 @@ public class EntregaDTO {
     private String entRecibe;
     private String entObservacion;
     private String entFechaEnvio;
+    private String entFechaRecibe;
+
+    
+
     private String entEstado;
     private Integer pedCodigo;
     
@@ -14,12 +18,12 @@ public class EntregaDTO {
     }
 
     public EntregaDTO(Integer entCodigo, String entDescripcion, String entRecibe, String entObservacion,
-            String entFechaEnvio, String entEstado, Integer pedCodigo) {
+             String entEstado, Integer pedCodigo) {
         this.entCodigo = entCodigo;
         this.entDescripcion = entDescripcion;
         this.entRecibe = entRecibe;
         this.entObservacion = entObservacion;
-        this.entFechaEnvio = entFechaEnvio;
+        //this.entFechaEnvio = entFechaEnvio;
         this.entEstado = entEstado;
         this.pedCodigo = pedCodigo;
     }
@@ -62,6 +66,14 @@ public class EntregaDTO {
 
     public void setEntFechaEnvio(String entFechaEnvio) {
         this.entFechaEnvio = entFechaEnvio;
+    }
+
+    public String getEntFechaRecibe() {
+        return entFechaRecibe;
+    }
+
+    public void setEntFechaRecibe(String entFechaRecibe) {
+        this.entFechaRecibe = entFechaRecibe;
     }
 
     public String getEntEstado() {

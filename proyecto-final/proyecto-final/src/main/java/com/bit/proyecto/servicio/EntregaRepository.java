@@ -57,11 +57,11 @@ public class EntregaRepository {
 
 
     private EntregaDTO getDTO(Entrega p){
-        return new EntregaDTO(p.getEntCodigo(), p.getEntDescripcion(), p.getEntRecibe(), p.getEntObservacion(), p.getEntFechaEnvio(), p.getEntEstado(), p.getPedCodigo());
+        return new EntregaDTO(p.getEntCodigo(), p.getEntDescripcion(), p.getEntRecibe(), p.getEntObservacion(), p.getEntEstado(), p.getPedCodigo());
     }
 
     private Entrega getEntidad(EntregaDTO p){
-        return new Entrega(p.getEntCodigo(), p.getEntDescripcion(), p.getEntRecibe(), p.getEntObservacion(), p.getEntFechaEnvio(), p.getEntEstado(), p.getPedCodigo());
+        return new Entrega(p.getEntCodigo(), p.getEntDescripcion(), p.getEntRecibe(), p.getEntObservacion(), p.getEntEstado(), p.getPedCodigo());
     }
 
 }
