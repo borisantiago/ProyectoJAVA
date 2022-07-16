@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bit.proyecto.modelo.Zapato;
 import com.bit.proyecto.modelo.dto.ZapatoDTO;
 import com.bit.proyecto.servicio.ZapatoRepository;
 
@@ -24,15 +25,27 @@ public class ZapatoController {
     @Autowired
     private ZapatoRepository repository;
 
-    @GetMapping("/todos")
+    @GetMapping("/todosDTO")
     @ResponseStatus(HttpStatus.OK)
     public List<ZapatoDTO> zapatos(){
-        return repository.listarZapatos();
+        return repository.listarZapatosDTO();
+    }
+
+    @GetMapping("/todos")
+    public ResponseEntity<List<Zapato>> buscarTodos(){
+        List<Zapato> zaps = repository.todosZapatos();
+        return new ResponseEntity<>(zaps, HttpStatus.OK);
+    }
+
+    @GetMapping("DTO/{id}")
+    public ResponseEntity<ZapatoDTO> buscarUnicoDTO(@PathVariable String id){
+        ZapatoDTO zap = repository.buscarUnicoDTO(id);
+        return new ResponseEntity<>(zap, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ZapatoDTO> buscarUnico(@PathVariable String id){
-        ZapatoDTO zap = repository.buscarUnico(id);
+    public ResponseEntity<Zapato> buscarUnico(@PathVariable String id){
+        Zapato zap = repository.buscarunico(id);
         return new ResponseEntity<>(zap, HttpStatus.OK);
     }
 

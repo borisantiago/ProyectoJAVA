@@ -17,7 +17,7 @@ public class ZapatoRepository {
     @Autowired
     private ZapatoDao repository;
 
-    public List<ZapatoDTO> listarZapatos(){
+    public List<ZapatoDTO> listarZapatosDTO(){
         List<ZapatoDTO> dtos = new ArrayList<>();
         for(Zapato z: repository.findAll()){
             dtos.add(new ZapatoDTO(z.getZapCodigo(), z.getZapNombre(), z.getZapModelo(), z.getZapGenero(), z.getZapColor(), z.getZapTalla(), z.getZapStock(), z.getZapPrecio()));
@@ -25,10 +25,19 @@ public class ZapatoRepository {
         return  dtos;
     }
 
-    public ZapatoDTO buscarUnico(String id){
+    public List<Zapato> todosZapatos(){
+        return (List<Zapato>) repository.findAll();
+    }
+
+    public ZapatoDTO buscarUnicoDTO(String id){
         Zapato per = repository.findById(id).orElseThrow(()-> new ZapatoException(" no se encontro la Zapato"));
         return this.getDTO(per);
     } 
+
+    public Zapato buscarunico(String id){
+        Zapato zap = repository.findById(id).orElseThrow(()-> new ZapatoException("No se encontro el zapato con el id"+ id));
+        return zap;
+    }
 
     public ZapatoDTO guardarZapato(ZapatoDTO p){
         Zapato per = repository.save(this.getEntidad(p));

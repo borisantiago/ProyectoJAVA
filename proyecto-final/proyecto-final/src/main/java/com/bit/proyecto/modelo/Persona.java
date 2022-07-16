@@ -49,6 +49,9 @@ public class Persona implements Serializable {
     private String perGenero;
     @Column(name = "PER_EMAIL")
     private String perEmail;
+
+    @Column(name = "ZAP_CODIGO")
+    private String zapCodigo;
     
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "PER_CODIGO", referencedColumnName = "PER_CODIGO")

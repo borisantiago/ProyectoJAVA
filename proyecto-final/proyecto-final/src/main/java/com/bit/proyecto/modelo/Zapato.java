@@ -1,21 +1,22 @@
 package com.bit.proyecto.modelo;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+
 @Entity
 @Table(name = "ZAPATO")
-@NamedQueries({
-    @NamedQuery(name = "Zapato.findAll", query = "SELECT z FROM Zapato z")})
+
 public class Zapato implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -44,8 +45,18 @@ public class Zapato implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "ZAP_PRECIO")
     private Double zapPrecio;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "zapCodigo")
-    private Collection<DetallePedido> detallePedidoCollection;
+    
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ZAP_CODIGO", referencedColumnName = "ZAP_CODIGO")
+    private List<DetallePedido> detallePedido = new ArrayList<>();
+
+    public List<DetallePedido> getDetallePedido() {
+        return detallePedido;
+    }
+
+    public void setDetallePedido(List<DetallePedido> detallePedido) {
+        this.detallePedido = detallePedido;
+    }
 
     public Zapato() {
     }
@@ -126,14 +137,5 @@ public class Zapato implements Serializable {
         this.zapPrecio = zapPrecio;
     }
 
-    public Collection<DetallePedido> getDetallePedidoCollection() {
-        return detallePedidoCollection;
-    }
-
-    public void setDetallePedidoCollection(Collection<DetallePedido> detallePedidoCollection) {
-        this.detallePedidoCollection = detallePedidoCollection;
-    }
-
-    
     
 }

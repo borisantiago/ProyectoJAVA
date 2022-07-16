@@ -39,8 +39,6 @@ public class PersonaRepository {
         return this.getDTO(per);
     } 
 
-    
-
     public PersonaDTO guardarPersona(PersonaDTO p){
         Persona per = repository.save(this.getEntidad(p));
         return this.getDTO(per);
@@ -61,7 +59,6 @@ public class PersonaRepository {
         repository.deleteById(id);
     }
     
-
     private PersonaDTO getDTO(Persona p){
         return new PersonaDTO(p.getPerCodigo(), p.getPerIdentificacion(), p.getPerNombre(), p.getPerApellido(), p.getPerDireccion(), 
         p.getPerTalla(), p.getPerFechaNacimiento(), p.getPerGenero(), p.getPerEmail());
