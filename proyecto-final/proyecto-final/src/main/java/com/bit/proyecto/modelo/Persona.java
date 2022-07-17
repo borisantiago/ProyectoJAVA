@@ -49,6 +49,10 @@ public class Persona implements Serializable {
     private String perGenero;
     @Column(name = "PER_EMAIL")
     private String perEmail;
+    @Column(name = "PER_PASSWORD")
+    private String perPassword;
+    @Column(name = "PER_ROLE")
+    private String perRole;
 
     @Column(name = "ZAP_CODIGO")
     private String zapCodigo;
@@ -56,6 +60,10 @@ public class Persona implements Serializable {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "PER_CODIGO", referencedColumnName = "PER_CODIGO")
     private List<Pedido> pedido= new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "PER_CODIGO", referencedColumnName = "PER_CODIGO")
+    private List<Carrito> carrito= new ArrayList<>();
 
     /*Pedido */
     public List<Pedido> getPedido() {
@@ -66,11 +74,20 @@ public class Persona implements Serializable {
         this.pedido = pedido;
     }
 
+    /*Carrito */
+    public List<Carrito> getCarrito() {
+        return carrito;
+    }
+
+    public void setCarrito(List<Carrito> carrito) {
+        this.carrito = carrito;
+    }
+
     public Persona() {
     }
 
     public Persona(Integer perCodigo, String perIdentificacion, String perNombre, String perApellido, String perDireccion, 
-            String perTalla, String perFechaNacimiento, String perGenero, String perEmail) {
+            String perTalla, String perFechaNacimiento, String perGenero, String perEmail, String perPassword, String perRole) {
         this.perCodigo = perCodigo;
         this.perIdentificacion = perIdentificacion;
         this.perNombre = perNombre;
@@ -80,6 +97,9 @@ public class Persona implements Serializable {
         this.perFechaNacimiento = perFechaNacimiento;
         this.perGenero = perGenero;
         this.perEmail = perEmail;
+        this.perPassword = perPassword;
+        this.perRole = perRole;
+
     }
 
     public Integer getPerCodigo() {
@@ -154,6 +174,21 @@ public class Persona implements Serializable {
         this.perEmail = perEmail;
     }
 
+    public String getPerPassword() {
+        return perPassword;
+    }
+
+    public void setPerPassword(String perPassword) {
+        this.perPassword = perPassword;
+    }
+
+    public String getPerRole() {
+        return perRole;
+    }
+
+    public void setPerRole(String perRole) {
+        this.perRole = perRole;
+    }
     
     
 }

@@ -16,13 +16,17 @@ public class PersonaDTO {
     private String perFechaNacimiento;
     private String perGenero;
     private String perEmail;
+    private String perPassword;
+    private String perRole;
+
+
     private List<Pedido> pedido = new ArrayList<>();
 
     public PersonaDTO() {
     }
 
     public PersonaDTO(Integer perCodigo, String perIdentificacion, String perNombre, String perApellido,
-            String perDireccion, String perTalla, String perFechaNacimiento, String perGenero, String perEmail) {
+            String perDireccion, String perTalla, String perFechaNacimiento, String perGenero, String perEmail, String perPassword, String perRole) {
         this.perCodigo = perCodigo;
         this.perIdentificacion = perIdentificacion;
         this.perNombre = perNombre;
@@ -32,6 +36,8 @@ public class PersonaDTO {
         this.perFechaNacimiento = perFechaNacimiento;
         this.perGenero = perGenero;
         this.perEmail = perEmail;
+        this.perPassword = perPassword;
+        this.perRole = perRole;
         
     }
 
@@ -116,8 +122,20 @@ public class PersonaDTO {
         this.pedido = pedido;
     }
     
+    public String getPerPassword() {
+        return perPassword;
+    }
 
-    
+    public void setPerPassword(String perPassword) {
+        this.perPassword = perPassword;
+    }
 
+    public String getPerRole() {
+        return perRole;
+    }
+
+    public void setPerRole(String perRole) {
+        this.perRole = perRole;
+    }
     
 }

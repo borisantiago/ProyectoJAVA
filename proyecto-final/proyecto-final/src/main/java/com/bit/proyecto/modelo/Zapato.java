@@ -1,6 +1,5 @@
 package com.bit.proyecto.modelo;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,9 +16,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "ZAPATO")
 
-public class Zapato implements Serializable {
+public class Zapato {
 
-    private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @Column(name = "ZAP_CODIGO")
@@ -45,10 +43,17 @@ public class Zapato implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "ZAP_PRECIO")
     private Double zapPrecio;
+
+    // @Column(name="CAR_CODIGO")
+    // private Integer carCodigo;
     
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "ZAP_CODIGO", referencedColumnName = "ZAP_CODIGO")
     private List<DetallePedido> detallePedido = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ZAP_CODIGO", referencedColumnName = "ZAP_CODIGO")
+    private List<Carrito> carrito = new ArrayList<>();
 
     public List<DetallePedido> getDetallePedido() {
         return detallePedido;
@@ -56,6 +61,14 @@ public class Zapato implements Serializable {
 
     public void setDetallePedido(List<DetallePedido> detallePedido) {
         this.detallePedido = detallePedido;
+    }
+
+    public List<Carrito> getCarrito() {
+        return carrito;
+    }
+
+    public void setCarrito(List<Carrito> carrito) {
+        this.carrito = carrito;
     }
 
     public Zapato() {
@@ -71,6 +84,7 @@ public class Zapato implements Serializable {
         this.zapTalla = zapTalla;
         this.zapStock = zapStock;
         this.zapPrecio = zapPrecio;
+
     }
 
     public String getZapCodigo() {
@@ -136,6 +150,14 @@ public class Zapato implements Serializable {
     public void setZapPrecio(Double zapPrecio) {
         this.zapPrecio = zapPrecio;
     }
+
+    // public Integer getCarCodigo() {
+    //     return carCodigo;
+    // }
+
+    // public void setCarCodigo(Integer carCodigo) {
+    //     this.carCodigo = carCodigo;
+    // }
 
     
 }

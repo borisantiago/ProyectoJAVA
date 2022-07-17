@@ -10,11 +10,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bit.proyecto.config.TokenLogin;
 import com.bit.proyecto.modelo.DetallePedido;
-import com.bit.proyecto.modelo.dto.DetallePedidoDTO;
 import com.bit.proyecto.modelo.dto.DetallePedidoDTO;
 import com.bit.proyecto.servicio.DetallePedidoRepository;
 
@@ -25,8 +26,11 @@ public class DetallePedidoController {
     @Autowired
     private DetallePedidoRepository repository;
 
+    @Autowired
+    TokenLogin tokens;
+
     @GetMapping("/todos")
-    public ResponseEntity<List<DetallePedido>> todosDetallePEdido(){
+    public ResponseEntity<List<DetallePedido>> todosDetallePEdido(@RequestHeader("token") String token){
         List<DetallePedido> detallePedido = repository.buscarTodos();
         return new ResponseEntity<>(detallePedido, HttpStatus.OK);
     } 
@@ -38,13 +42,13 @@ public class DetallePedidoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<DetallePedido> buscarUnico(@PathVariable Integer id){
+    public ResponseEntity<DetallePedido> buscarUnico(@PathVariable Integer id, @RequestHeader("token") String token){
         DetallePedido per = repository.buscarUnico(id);
         return new ResponseEntity<>(per, HttpStatus.OK);
     }
 
     @PostMapping("/agregar")
-    public ResponseEntity<?> crearDetallePedido(@RequestBody DetallePedidoDTO detallePedidoDTO){
+    public ResponseEntity<?> crearDetallePedido(@RequestBody DetallePedidoDTO detallePedidoDTO, @RequestHeader("token") String token){
         repository.guardarDetallePedido(detallePedidoDTO);
         return new ResponseEntity<>(detallePedidoDTO, HttpStatus.CREATED);
     }
@@ -57,7 +61,7 @@ public class DetallePedidoController {
     }
 
     @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<String> eliminarDetallePedido(@PathVariable("id") Integer id){
+    public ResponseEntity<String> eliminarDetallePedido(@PathVariable("id") Integer id, @RequestHeader("token") String token){
         repository.eliminarDetallePedido(id);
         return new ResponseEntity<>("Se elimino correctamente", HttpStatus.OK);
     }

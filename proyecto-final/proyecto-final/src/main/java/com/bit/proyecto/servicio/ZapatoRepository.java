@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 import com.bit.proyecto.dao.ZapatoDao;
 import com.bit.proyecto.exception.ZapatoException;
@@ -115,10 +116,6 @@ public class ZapatoRepository {
         repository.findById(id).orElseThrow(()-> new ZapatoException(" no se encontro la peronsa con codigo"));
         repository.deleteById(id);
     }
-    
-
-
-
 
     private ZapatoDTO getDTO(Zapato z){
         return new ZapatoDTO(z.getZapCodigo(), z.getZapNombre(), z.getZapModelo(), z.getZapGenero(), z.getZapColor(), 

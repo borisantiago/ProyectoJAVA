@@ -16,6 +16,8 @@ public class PersonaRepository {
     @Autowired
     private PersonaDao repository;
 
+    //Encriptar clave
+
     public List<PersonaDTO> buscarTodos2(){
         List<PersonaDTO> dtos = new ArrayList<>();
         for(Persona p: repository.findAll()){
@@ -39,11 +41,17 @@ public class PersonaRepository {
     } 
 
     public PersonaDTO guardarPersona(PersonaDTO p){
+        if(p.getPerRole() == null ){
+            p.setPerRole("Cliente");    
+        }
         Persona per = repository.save(this.getEntidad(p));
         return this.getDTO(per);
     }
 
     public void guardarPersona2(Persona p){
+        if(p.getPerRole() == null || p.getPerRole() == "" || p.getPerRole() == "null"){
+            p.setPerRole("cliente");
+        }
         repository.save(p);
     }
 
@@ -60,12 +68,12 @@ public class PersonaRepository {
     
     private PersonaDTO getDTO(Persona p){
         return new PersonaDTO(p.getPerCodigo(), p.getPerIdentificacion(), p.getPerNombre(), p.getPerApellido(), p.getPerDireccion(), 
-                p.getPerTalla(), p.getPerFechaNacimiento(), p.getPerGenero(), p.getPerEmail());
+                p.getPerTalla(), p.getPerFechaNacimiento(), p.getPerGenero(), p.getPerEmail(), p.getPerPassword(), p.getPerRole());
     }
 
     private Persona getEntidad(PersonaDTO p){
         return new Persona(p.getPerCodigo(), p.getPerIdentificacion(), p.getPerNombre(), p.getPerApellido(), p.getPerDireccion(), 
-                p.getPerTalla(), p.getPerFechaNacimiento(), p.getPerGenero(), p.getPerEmail());
+                p.getPerTalla(), p.getPerFechaNacimiento(), p.getPerGenero(), p.getPerEmail(), p.getPerPassword(), p.getPerRole());
     }
 
 

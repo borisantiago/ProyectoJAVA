@@ -11,11 +11,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bit.proyecto.config.TokenLogin;
 import com.bit.proyecto.modelo.Zapato;
 import com.bit.proyecto.modelo.dto.ZapatoDTO;
 import com.bit.proyecto.rest.Output;
@@ -27,6 +29,9 @@ public class ZapatoController {
     
     @Autowired
     private ZapatoRepository repository;
+
+    @Autowired
+    TokenLogin tokens;
 
     //filtrado por genero 
     @GetMapping("/genero/{genero}")
@@ -116,7 +121,7 @@ public class ZapatoController {
     }
 
     @GetMapping("/todos")
-    public ResponseEntity<List<Zapato>> buscarTodos(){
+    public ResponseEntity<List<Zapato>> buscarTodos(@RequestHeader("token") String token){
         List<Zapato> zaps = repository.todosZapatos();
         return new ResponseEntity<>(zaps, HttpStatus.OK);
     }
