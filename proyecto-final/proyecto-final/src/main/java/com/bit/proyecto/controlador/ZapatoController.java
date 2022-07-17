@@ -3,6 +3,7 @@ package com.bit.proyecto.controlador;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -27,22 +28,83 @@ public class ZapatoController {
     @Autowired
     private ZapatoRepository repository;
 
-  
-    @GetMapping("/catalogo2/{genero}")
+    //filtrado por genero 
+    @GetMapping("/genero/{genero}")
     public ResponseEntity<List<ZapatoDTO>> getCatalogo2(@PathVariable String genero){
         List<ZapatoDTO> zaps = repository.buscarFiltrado(genero);
         return new ResponseEntity<>(zaps, HttpStatus.OK);
-
     }
 
-
-    //catalogo busqueda por genero
-    @GetMapping("/catalogo")
-    public Output getCatalogo(@RequestParam("genero") String genero){
+    @GetMapping("/genero")
+    public Output getCatalogoGenero(@RequestParam("genero") String genero){
         Output salida = new Output();
         salida.setCodigo("0");
         salida.setMensaje("Peticion procesada con exito");
         salida.setEntidad(repository.buscarFiltrado(genero));
+
+        return salida;
+    }
+
+    //filtrado por talla
+    @GetMapping("/talla/{talla}")
+    public ResponseEntity<List<ZapatoDTO>> getCatalogoTalla(@PathVariable String talla){
+        List<ZapatoDTO> zaps = repository.buscarFiltradoTalla(talla);
+        return new ResponseEntity<>(zaps, HttpStatus.OK);
+
+    }
+
+    @GetMapping("/talla")
+    public Output getCatalogo(@RequestParam("talla") String talla){
+        Output salida = new Output();
+        salida.setCodigo("0");
+        salida.setMensaje("Peticion procesada con exito");
+        salida.setEntidad(repository.buscarFiltradoTalla(talla));
+
+        return salida;
+    }
+
+    //filtrado por color
+    @GetMapping("/color/{color}")
+    public ResponseEntity<List<ZapatoDTO>> getCatalogoColor(@PathVariable String color){
+        List<ZapatoDTO> zaps = repository.buscarFiltradoColor(color);
+        return new ResponseEntity<>(zaps, HttpStatus.OK);
+    }
+
+    @GetMapping("/color")
+    public Output getCatalogoColor2(@RequestParam("color") String color){
+        Output salida = new Output();
+        salida.setCodigo("0");
+        salida.setMensaje("Peticion procesada con exito");
+        salida.setEntidad(repository.buscarFiltradoColor(color));
+
+        return salida;
+    }
+
+    //filtrado por precio
+    @GetMapping("/precio/{precio}")
+    public ResponseEntity<List<ZapatoDTO>> getCatalogoPrecio(@PathVariable Double precio){
+        List<ZapatoDTO> zaps = repository.buscarFiltradoPrecio(precio);
+        return new ResponseEntity<>(zaps, HttpStatus.OK);
+    }
+
+    @GetMapping("/precio")
+    public Output getCatalogoPrecio2(@RequestParam("precio") Double precio){
+        Output salida = new Output();
+        salida.setCodigo("0");
+        salida.setMensaje("Peticion procesada con exito");
+        salida.setEntidad(repository.buscarFiltradoPrecio(precio));
+
+        return salida;
+    }
+
+    //Paginado (Request)
+    @RequestMapping("/catalogo_pag")
+    public Output getCatalogoPaginado(Pageable pageable){
+        
+        Output salida = new Output();
+        salida.setCodigo("200");
+        salida.setMensaje("Busqueda realizada con éxito");
+        salida.setEntidad(repository.buscarPaginado(pageable));
 
         return salida;
     }

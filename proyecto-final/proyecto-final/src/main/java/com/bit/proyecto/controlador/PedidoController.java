@@ -3,6 +3,7 @@ package com.bit.proyecto.controlador;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -11,10 +12,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bit.proyecto.modelo.Pedido;
 import com.bit.proyecto.modelo.dto.PedidoDTO;
+import com.bit.proyecto.rest.Output;
 import com.bit.proyecto.servicio.PedidoRepository;
 
 
@@ -24,6 +27,24 @@ public class PedidoController {
     
     @Autowired
     private PedidoRepository repository;
+
+    //Buscar pedidos de una persona
+    @GetMapping("/persona")
+    public Output getPedidosPersona(@RequestParam("id") Integer id){
+        Output salida = new Output();
+         salida.setCodigo("200");
+         salida.setMensaje("Pedidos del cliente id " +id +" son: ");
+         salida.setEntidad(repository.pedidosPorIdCliente(id));
+
+         return salida;
+    }
+
+    
+    @GetMapping("/persona/{id}")
+    public ResponseEntity<List<PedidoDTO>> getCatalogo2(@PathVariable Integer id){
+        List<PedidoDTO> zaps = repository.pedidosPorIdCliente(id);
+        return new ResponseEntity<>(zaps, HttpStatus.OK);
+    }
 
     @GetMapping("/todos")
     public ResponseEntity<List<Pedido>> pedidosLista(){

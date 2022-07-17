@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import com.bit.proyecto.dao.ZapatoDao;
@@ -26,10 +27,56 @@ public class ZapatoRepository {
         Zapato pla = this.getEntidad(plantilla);
         List<ZapatoDTO> dtos = new ArrayList<>();
         for(Zapato z: repository.findAll(Example.of(pla))){
+                dtos.add(this.getDTO(z));
+        }
+        return dtos;
+    }
+
+    //Filtrar por genero
+    public List<ZapatoDTO> buscarFiltradoTalla(String talla){
+        ZapatoDTO plantilla = new ZapatoDTO();
+        plantilla.setZapTalla(talla);
+        Zapato pla = this.getEntidad(plantilla);
+        List<ZapatoDTO> dtos = new ArrayList<>();
+        for(Zapato z: repository.findAll(Example.of(pla))){
+                dtos.add(this.getDTO(z));
+        }
+        return dtos;
+    }
+
+    //Filtrar por color
+    public List<ZapatoDTO> buscarFiltradoColor(String color){
+        ZapatoDTO plantilla = new ZapatoDTO();
+        plantilla.setZapColor(color);
+        Zapato pla = this.getEntidad(plantilla);
+        List<ZapatoDTO> dtos = new ArrayList<>();
+        for(Zapato z: repository.findAll(Example.of(pla))){
+                dtos.add(this.getDTO(z));
+        }
+        return dtos;
+    }
+
+    //Filtrar por precio
+    public List<ZapatoDTO> buscarFiltradoPrecio(Double precio){
+        ZapatoDTO plantilla = new ZapatoDTO();
+        plantilla.setZapPrecio(precio);
+        Zapato pla = this.getEntidad(plantilla);
+        List<ZapatoDTO> dtos = new ArrayList<>();
+        for(Zapato z: repository.findAll(Example.of(pla))){
+                dtos.add(this.getDTO(z));
+        }
+        return dtos;
+    }
+    
+    //paginar
+    public List<ZapatoDTO> buscarPaginado(Pageable pageable){
+        List<ZapatoDTO> dtos = new ArrayList<>();
+        for(Zapato z: repository.findAll(pageable)){
             dtos.add(this.getDTO(z));
         }
         return dtos;
     }
+
 
     public List<ZapatoDTO> listarZapatosDTO(){
         List<ZapatoDTO> dtos = new ArrayList<>();

@@ -94,11 +94,11 @@ public class PedidoDTO {
         this.pedIva = pedIva;
     }
 
-    public Integer getperCodigo() {
+    public Integer getPerCodigo() {
         return perCodigo;
     }
 
-    public void setperCodigo(Integer perCodigo) {
+    public void setPerCodigo(Integer perCodigo) {
         this.perCodigo = perCodigo;
     }
 

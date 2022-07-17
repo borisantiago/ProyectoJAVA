@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Repository;
 
 import com.bit.proyecto.dao.PedidoDao;
@@ -16,6 +17,18 @@ public class PedidoRepository {
     
     @Autowired
     private PedidoDao repository;
+
+    //pedidos de cliente
+    public List<PedidoDTO> pedidosPorIdCliente(Integer id){
+        PedidoDTO plantilla = new PedidoDTO();
+        plantilla.setPerCodigo(id);
+        Pedido planti = this.getEntidad(plantilla);
+        List<PedidoDTO> dtos = new ArrayList<>();
+        for(Pedido p : repository.findAll(Example.of(planti))){
+            dtos.add(this.getDTO(p));
+        }
+        return dtos;
+    }
 
     public List<PedidoDTO> buscarTodos2(){
         List<PedidoDTO> dtos = new ArrayList<>();
@@ -35,6 +48,7 @@ public class PedidoRepository {
     } 
 
     public PedidoDTO guardarPedido(PedidoDTO p){
+        p.setPedEstado("Gestionando");
         Pedido per = repository.save(this.getEntidad(p));
         return this.getDTO(per);
     }
@@ -64,7 +78,7 @@ public class PedidoRepository {
 
     private Pedido getEntidad(PedidoDTO p){
         return new Pedido(p.getPedCodigo(), p.getPedFecha(), p.getPedObservacion(), p.getPedEstado(), p.getPedSubtotal(), 
-        p.getPedFactura(), p.getPedIva(), p.getperCodigo());
+        p.getPedFactura(), p.getPedIva(), p.getPerCodigo());
     }
 
 
