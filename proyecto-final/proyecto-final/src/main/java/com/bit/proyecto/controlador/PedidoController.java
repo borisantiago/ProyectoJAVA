@@ -70,13 +70,13 @@ public class PedidoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PedidoDTO> buscarUnico(@PathVariable Integer id, @RequestHeader("token") String token){
-        PedidoDTO per = repository.buscarUnico(id);
+    public ResponseEntity<Pedido> buscarUnico(@PathVariable Integer id, @RequestHeader("token") String token){
+        Pedido per = repository.buscarUnico1(id);
         return new ResponseEntity<>(per, HttpStatus.OK);
     }
 
     @PostMapping("/agregar")
-    public ResponseEntity<?> crearPedido(@RequestBody PedidoDTO pedidoDTO){
+    public ResponseEntity<?> crearPedido(@RequestBody PedidoDTO pedidoDTO, @RequestHeader("token") String token){
         repository.guardarPedido(pedidoDTO);
         return new ResponseEntity<>(pedidoDTO, HttpStatus.CREATED);
     }

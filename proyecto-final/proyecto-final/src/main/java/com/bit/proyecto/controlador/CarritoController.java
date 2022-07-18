@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,19 +31,19 @@ public class CarritoController {
     }
 
     @GetMapping("/todos")
-    public ResponseEntity<List<Carrito>> todosCarrito(){
+    public ResponseEntity<List<Carrito>> todosCarrito(@RequestHeader("token") String token){
         List<Carrito> carrito = repository.buscarTodos();
         return new ResponseEntity<>(carrito, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Carrito> buscarUnico(@PathVariable Integer id){ 
+    public ResponseEntity<Carrito> buscarUnico(@PathVariable Integer id, @RequestHeader("token") String token){ 
         Carrito per = repository.buscarUnico(id);
         return new ResponseEntity<>(per, HttpStatus.OK);
     }
 
     @PostMapping("/agregar")
-    public ResponseEntity<?> crearCarrito(@RequestBody Carrito carrito){
+    public ResponseEntity<?> crearCarrito(@RequestBody Carrito carrito,  @RequestHeader("token") String token){
         repository.guardarCarrito(carrito);
         return new ResponseEntity<>(carrito, HttpStatus.CREATED);
     }

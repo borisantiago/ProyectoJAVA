@@ -84,7 +84,12 @@ public class PedidoRepository {
     public PedidoDTO buscarUnico(Integer id){
         Pedido pedido = repository.findById(id).orElseThrow(()-> new PedidoException("no se encontro la Pedido"));
         return this.getDTO(pedido);
-    } 
+    }
+    
+    public Pedido buscarUnico1(Integer id){
+        Pedido pedido = repository.findById(id).orElseThrow(()-> new PedidoException("no se encontro la Pedido"));
+        return pedido;
+    }
 
     public PedidoDTO guardarPedido(PedidoDTO p){
         p.setPedEstado("Gestionando");
