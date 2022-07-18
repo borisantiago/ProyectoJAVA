@@ -18,6 +18,10 @@ public class PersonaRepository {
 
     //Encriptar clave
 
+    public Persona loginPersona(Persona per){
+        return (Persona) repository.findByPerEmailAndPerPassword(per.getPerEmail(), per.getPerPassword());
+    }
+
     public List<PersonaDTO> buscarTodos2(){
         List<PersonaDTO> dtos = new ArrayList<>();
         for(Persona p: repository.findAll()){

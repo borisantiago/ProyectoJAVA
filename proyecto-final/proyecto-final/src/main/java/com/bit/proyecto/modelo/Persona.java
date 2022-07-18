@@ -64,6 +64,7 @@ public class Persona implements Serializable {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "PER_CODIGO", referencedColumnName = "PER_CODIGO")
     private List<Carrito> carrito= new ArrayList<>();
+    public String token;
 
     /*Pedido */
     public List<Pedido> getPedido() {

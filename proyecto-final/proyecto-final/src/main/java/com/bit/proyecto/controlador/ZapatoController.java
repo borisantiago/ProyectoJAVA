@@ -139,7 +139,7 @@ public class ZapatoController {
     }
 
     @PostMapping("/agregar")
-    public ResponseEntity<?> crearZapato(@RequestBody ZapatoDTO zapatoDTO){
+    public ResponseEntity<?> crearZapato(@RequestBody ZapatoDTO zapatoDTO, @RequestHeader("token") String token){
         repository.guardarZapato(zapatoDTO);
         return new ResponseEntity<>(zapatoDTO, HttpStatus.CREATED);
     }

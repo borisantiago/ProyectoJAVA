@@ -29,6 +29,19 @@ public class PersonaController {
     @Autowired
     TokenLogin tokens;
 
+    @PostMapping("/loginPersona")
+    public ResponseEntity<?> loginProfesor(@RequestBody Persona p){
+        Persona personaDB = repository.loginPersona(p);
+        
+        if(personaDB != null){
+            String token = tokens.addToken(p.getPerEmail());
+            personaDB.token = token;
+            return new ResponseEntity<>(personaDB, HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>("Usuario o contraseña incorrectos!", HttpStatus.NOT_FOUND);
+        }
+    }
+
 
     @GetMapping("/todos")
     public ResponseEntity<List<Persona>> todosPersonas(@RequestHeader("token") String token){
@@ -66,6 +79,7 @@ public class PersonaController {
         repository.eliminarPersona(id);
         return new ResponseEntity<>("Se elimino correctamente", HttpStatus.OK);
     }
+    
     
     
 }

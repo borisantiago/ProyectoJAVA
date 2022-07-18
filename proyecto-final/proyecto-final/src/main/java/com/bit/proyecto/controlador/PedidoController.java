@@ -44,7 +44,13 @@ public class PedidoController {
          return salida;
     }
 
-    
+    //GestionarPedido
+    @PostMapping("/estado")
+    public ResponseEntity<String> gestionarEstado(@RequestBody Pedido p){
+        repository.actualizarPedidoP(p);
+        return new ResponseEntity<>("Se actualizado el estado correctamente '"+ p.getPedEstado() + "' de cliente '"+p.getPedCodigo()+"'", HttpStatus.OK);
+    }
+
     @GetMapping("/persona/{id}")
     public ResponseEntity<List<PedidoDTO>> getCatalogo2(@PathVariable Integer id){
         List<PedidoDTO> zaps = repository.pedidosPorIdCliente(id);

@@ -30,6 +30,45 @@ public class PedidoRepository {
         return dtos;
     }
 
+    //actualizarEstado
+
+    public Pedido actualizarPedidoP(Pedido p){
+        Pedido per = repository.findById(p.getPerCodigo()).orElseThrow(()-> new PedidoException("persona no encontrada"));
+        if(p.getPedFecha() == null){
+            p.setPedFecha(per.getPedFecha());
+        }
+        if(p.getPedObservacion() == null){
+            p.setPedObservacion(per.getPedObservacion());
+        }
+        if(p.getPedFactura() == null){
+            p.setPedFactura(per.getPedFactura());
+        }
+        if(p.getPedIva() == null){
+            p.setPedIva(per.getPedIva());
+        }
+        if(p.getPerCodigo() == null){
+            p.setPerCodigo(per.getPedCodigo());
+        }
+
+    
+        repository.save(p);
+        return per;
+    }
+
+    public PedidoDTO actualizarPedido(PedidoDTO p){
+        Pedido per = repository.findById(p.getPedCodigo()).orElseThrow(()-> new PedidoException("Pedido no encontrada"));
+        p.setPedFecha(p.getPedFecha());
+        p.setPedObservacion(p.getPedObservacion());
+        p.setPedSubtotal(p.getPedSubtotal());
+        p.setPedFactura(p.getPedFactura());
+        p.setPedIva(p.getPedIva());
+        
+        // per.getPedEstado();
+        
+        repository.save(this.getEntidad(p));
+        return this.getDTO(per);
+    }
+
     public List<PedidoDTO> buscarTodos2(){
         List<PedidoDTO> dtos = new ArrayList<>();
         for(Pedido p: repository.findAll()){
@@ -59,11 +98,7 @@ public class PedidoRepository {
     }
     
 
-    public PedidoDTO actualizarPedido(PedidoDTO p){
-        Pedido per = repository.findById(p.getPedCodigo()).orElseThrow(()-> new PedidoException("Pedido no encontrada"));
-        repository.save(this.getEntidad(p));
-        return this.getDTO(per);
-    }
+    
 
     public void eliminarPedido(Integer id){
         repository.findById(id).orElseThrow(()-> new PedidoException("no se encontro la peronsa con codigo"));

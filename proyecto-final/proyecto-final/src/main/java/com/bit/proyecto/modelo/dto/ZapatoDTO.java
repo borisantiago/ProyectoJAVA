@@ -14,6 +14,10 @@ public class ZapatoDTO {
     public ZapatoDTO() {
     }
 
+    public ZapatoDTO(String zapCodigo) {
+        this.zapCodigo = zapCodigo;
+    }
+
     public ZapatoDTO(String zapCodigo, String zapNombre, String zapModelo, String zapGenero, String zapColor,
             String zapTalla, Integer zapStock, Double zapPrecio) {
         this.zapCodigo = zapCodigo;

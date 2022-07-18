@@ -9,9 +9,7 @@ import com.bit.proyecto.modelo.Persona;
 
 public interface PersonaDao extends JpaRepository<Persona, Integer> {
 
-    
-
-
+    public Persona findByPerEmailAndPerPassword(String perEmail, String perPassword);
 
       
 }
