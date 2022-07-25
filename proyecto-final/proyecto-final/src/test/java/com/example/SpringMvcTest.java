@@ -36,27 +36,29 @@ public class SpringMvcTest {
 
     @Before
     public void init() {
-        Zapato zapato = new Zapato("1", "Reebok", "Atleta", "F", "Gris", "38", 99, 55.0);
+        Zapato zapato = new Zapato("100", "Reebok", "Casuales", "M", "Gris", "40", 9, 60.0);
         Mockito.when(mockRepository.findById("1")).thenReturn(Optional.of(zapato));
     }
 
     //@WithMockUser("user")
     @Test
     public void buscaId() throws Exception {
-        mockMvc.perform(get("/zapato/1"))
+        mockMvc.perform(get("/zapato/100"))
                 .andDo(print()).andExpect(status().isOk())
-                .andExpect(jsonPath("$.zapCodigo", Matchers.is("1")))
+                .andExpect(jsonPath("$.zapCodigo", Matchers.is("100")))
                 .andExpect(jsonPath("$.zapNombre", Matchers.is("Reebok")))
-                .andExpect(jsonPath("$.zapModelo", Matchers.is("Atleta")))
-                .andExpect(jsonPath("$.zapGenero", Matchers.is("F")))
+                .andExpect(jsonPath("$.zapModelo", Matchers.is("Casuales")))
+                .andExpect(jsonPath("$.zapGenero", Matchers.is("M")))
                 .andExpect(jsonPath("$.zapColor", Matchers.is("Gris")))
-                .andExpect(jsonPath("$.zapTalla", Matchers.is("38")))
-                .andExpect(jsonPath("$.zapStock", Matchers.is(99)));
+                .andExpect(jsonPath("$.zapTalla", Matchers.is("40")))
+                .andExpect(jsonPath("$.zapStock", Matchers.is(9)))
+                .andExpect(jsonPath("$.zapPrecio", Matchers.is(60.0)));
+
     }
 
     @Test
     public void error() throws Exception {     
-        mockMvc.perform(get("/zapato/1"))
+        mockMvc.perform(get("/zapato/100"))
                 .andDo(print())
                 .andExpect(status().isUnauthorized());
     }

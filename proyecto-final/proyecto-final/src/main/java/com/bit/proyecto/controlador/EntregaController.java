@@ -42,7 +42,7 @@ public class EntregaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Entrega> buscarUnico(@RequestHeader("token") String token, @PathVariable Integer id){
+    public ResponseEntity<Entrega> buscarUnico(@PathVariable Integer id){
         Entrega per = repository.buscarUnico(id);
         return new ResponseEntity<>(per, HttpStatus.OK);
     }

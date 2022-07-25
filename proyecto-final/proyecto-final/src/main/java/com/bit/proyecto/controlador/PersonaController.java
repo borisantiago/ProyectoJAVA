@@ -62,7 +62,7 @@ public class PersonaController {
     }
 
     @PostMapping("/agregar")
-    public ResponseEntity<?> crearPersona(@RequestBody PersonaDTO personaDTO, @RequestHeader("token") String token){
+    public ResponseEntity<?> crearPersona(@RequestBody PersonaDTO personaDTO){
         repository.guardarPersona(personaDTO);
         return new ResponseEntity<>(personaDTO, HttpStatus.CREATED);
     }

@@ -45,7 +45,7 @@ public class PedidoController {
     }
 
     //GestionarPedido
-    @PostMapping("/estado")
+    @PostMapping("/comprar")
     public ResponseEntity<String> gestionarEstado(@RequestBody Pedido p){
         repository.actualizarPedidoP(p);
         return new ResponseEntity<>("Se actualizado el estado correctamente '"+ p.getPedEstado() + "' de cliente '"+p.getPedCodigo()+"'", HttpStatus.OK);

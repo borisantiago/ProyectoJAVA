@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +26,7 @@ import com.bit.proyecto.servicio.ZapatoRepository;
 
 @RestController
 @RequestMapping("/zapato")
+@CrossOrigin("*")
 public class ZapatoController {
     
     @Autowired
@@ -121,7 +123,7 @@ public class ZapatoController {
     }
 
     @GetMapping("/todos")
-    public ResponseEntity<List<Zapato>> buscarTodos(@RequestHeader("token") String token){
+    public ResponseEntity<List<Zapato>> buscarTodos(){
         List<Zapato> zaps = repository.todosZapatos();
         return new ResponseEntity<>(zaps, HttpStatus.OK);
     }
@@ -139,7 +141,7 @@ public class ZapatoController {
     }
 
     @PostMapping("/agregar")
-    public ResponseEntity<?> crearZapato(@RequestBody ZapatoDTO zapatoDTO, @RequestHeader("token") String token){
+    public ResponseEntity<?> crearZapato(@RequestBody ZapatoDTO zapatoDTO){
         repository.guardarZapato(zapatoDTO);
         return new ResponseEntity<>(zapatoDTO, HttpStatus.CREATED);
     }
