@@ -3,7 +3,6 @@ package com.bit.proyecto.controlador;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -11,12 +10,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bit.proyecto.config.TokenLogin;
 import com.bit.proyecto.modelo.Pedido;
 import com.bit.proyecto.modelo.dto.PedidoDTO;
 import com.bit.proyecto.rest.Output;
@@ -29,9 +26,6 @@ public class PedidoController {
     
     @Autowired
     private PedidoRepository repository;
-
-    @Autowired
-    TokenLogin tokens;
 
     //Buscar pedidos de una persona
     @GetMapping("/persona")
@@ -58,7 +52,7 @@ public class PedidoController {
     }
 
     @GetMapping("/todos")
-    public ResponseEntity<List<Pedido>> pedidosLista(@RequestHeader("token") String token){
+    public ResponseEntity<List<Pedido>> pedidosLista(){
         List<Pedido> pedidos = repository.buscarTodos();
         return new ResponseEntity<>(pedidos, HttpStatus.OK);
     }
@@ -70,13 +64,13 @@ public class PedidoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Pedido> buscarUnico(@PathVariable Integer id, @RequestHeader("token") String token){
+    public ResponseEntity<Pedido> buscarUnico(@PathVariable Integer id){
         Pedido per = repository.buscarUnico1(id);
         return new ResponseEntity<>(per, HttpStatus.OK);
     }
 
     @PostMapping("/agregar")
-    public ResponseEntity<?> crearPedido(@RequestBody PedidoDTO pedidoDTO, @RequestHeader("token") String token){
+    public ResponseEntity<?> crearPedido(@RequestBody PedidoDTO pedidoDTO){
         repository.guardarPedido(pedidoDTO);
         return new ResponseEntity<>(pedidoDTO, HttpStatus.CREATED);
     }

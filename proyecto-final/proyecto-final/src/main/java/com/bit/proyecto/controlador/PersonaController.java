@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bit.proyecto.config.TokenLogin;
 import com.bit.proyecto.modelo.Persona;
 import com.bit.proyecto.modelo.dto.PersonaDTO;
 import com.bit.proyecto.servicio.PersonaRepository;
@@ -26,16 +25,13 @@ public class PersonaController {
     @Autowired
     private PersonaRepository repository;
 
-    @Autowired
-    TokenLogin tokens;
-
     @PostMapping("/loginPersona")
     public ResponseEntity<?> loginProfesor(@RequestBody Persona p){
         Persona personaDB = repository.loginPersona(p);
         
         if(personaDB != null){
-            String token = tokens.addToken(p.getPerEmail());
-            personaDB.token = token;
+            // String token = tokens.addToken(p.getPerEmail());
+            // personaDB.token = token;
             return new ResponseEntity<>(personaDB, HttpStatus.OK);
         }else{
             return new ResponseEntity<>("Usuario o contraseña incorrectos!", HttpStatus.NOT_FOUND);
@@ -44,19 +40,19 @@ public class PersonaController {
 
 
     @GetMapping("/todos")
-    public ResponseEntity<List<Persona>> todosPersonas(@RequestHeader("token") String token){
+    public ResponseEntity<List<Persona>> todosPersonas(){
         List<Persona> personas = repository.buscarTodos();
         return new ResponseEntity<>(personas, HttpStatus.OK);
     }
 
     @GetMapping("id/{id}")
-    public ResponseEntity<PersonaDTO> buscarUnicoDTO(@PathVariable Integer id, @RequestHeader("token") String token){
+    public ResponseEntity<PersonaDTO> buscarUnicoDTO(@PathVariable Integer id){
         PersonaDTO per = repository.buscarUnicoDTO(id);
         return new ResponseEntity<>(per, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Persona> buscarUnico(@PathVariable Integer id, @RequestHeader("token") String token){
+    public ResponseEntity<Persona> buscarUnico(@PathVariable Integer id){
         Persona per = repository.buscarUnico(id);
         return new ResponseEntity<>(per, HttpStatus.OK);
     }
@@ -75,7 +71,7 @@ public class PersonaController {
     }
 
     @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<String> eliminarPersona(@PathVariable("id") Integer id, @RequestHeader("token") String token){
+    public ResponseEntity<String> eliminarPersona(@PathVariable("id") Integer id){
         repository.eliminarPersona(id);
         return new ResponseEntity<>("Se elimino correctamente", HttpStatus.OK);
     }

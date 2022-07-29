@@ -31,19 +31,19 @@ public class CarritoController {
     }
 
     @GetMapping("/todos")
-    public ResponseEntity<List<Carrito>> todosCarrito(@RequestHeader("token") String token){
+    public ResponseEntity<List<Carrito>> todosCarrito(){
         List<Carrito> carrito = repository.buscarTodos();
         return new ResponseEntity<>(carrito, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Carrito> buscarUnico(@PathVariable Integer id, @RequestHeader("token") String token){ 
+    public ResponseEntity<Carrito> buscarUnico(@PathVariable Integer id){ 
         Carrito per = repository.buscarUnico(id);
         return new ResponseEntity<>(per, HttpStatus.OK);
     }
 
     @PostMapping("/agregar")
-    public ResponseEntity<?> crearCarrito(@RequestBody Carrito carrito,  @RequestHeader("token") String token){
+    public ResponseEntity<?> crearCarrito(@RequestBody Carrito carrito){
         repository.guardarCarrito(carrito);
         return new ResponseEntity<>(carrito, HttpStatus.CREATED);
     }

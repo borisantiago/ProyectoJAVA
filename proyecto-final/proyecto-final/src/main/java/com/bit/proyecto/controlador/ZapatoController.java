@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bit.proyecto.config.TokenLogin;
 import com.bit.proyecto.modelo.Zapato;
 import com.bit.proyecto.modelo.dto.ZapatoDTO;
 import com.bit.proyecto.rest.Output;
@@ -32,8 +31,6 @@ public class ZapatoController {
     @Autowired
     private ZapatoRepository repository;
 
-    @Autowired
-    TokenLogin tokens;
 
     //filtrado por genero 
     @GetMapping("/genero/{genero}")

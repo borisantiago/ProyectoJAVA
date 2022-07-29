@@ -10,11 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bit.proyecto.config.TokenLogin;
 import com.bit.proyecto.modelo.Entrega;
 import com.bit.proyecto.modelo.dto.EntregaDTO;
 import com.bit.proyecto.servicio.EntregaRepository;
@@ -26,11 +24,8 @@ public class EntregaController {
     @Autowired
     private EntregaRepository repository;
 
-    @Autowired
-    TokenLogin tokens;
-
     @GetMapping("/todos")
-    public ResponseEntity<List<Entrega>> todosEntrega(@RequestHeader("token") String token){
+    public ResponseEntity<List<Entrega>> todosEntrega(){
         List<Entrega> entrega = repository.buscarTodos();
         return new ResponseEntity<>(entrega, HttpStatus.OK);
     }
