@@ -5,6 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bit.proyecto.modelo.Persona;
 import com.bit.proyecto.modelo.dto.PersonaDTO;
+import com.bit.proyecto.security.AuthResponse;
+import com.bit.proyecto.security.jwt.JwtTokenUtil;
 import com.bit.proyecto.servicio.PersonaRepository;
 
 @RestController
@@ -25,14 +30,27 @@ public class PersonaController {
     @Autowired
     private PersonaRepository repository;
 
-    @PostMapping("/loginPersona")
+    @Autowired
+    AuthenticationManager authManager;
+
+    @Autowired
+    JwtTokenUtil jwtUtil;
+
+    @PostMapping("/login")
     public ResponseEntity<?> loginProfesor(@RequestBody Persona p){
         Persona personaDB = repository.loginPersona(p);
         
         if(personaDB != null){
-            // String token = tokens.addToken(p.getPerEmail());
-            // personaDB.token = token;
-            return new ResponseEntity<>(personaDB, HttpStatus.OK);
+
+            Authentication authentication = authManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                    p.getPerEmail(), p.getPerPassword())
+            );
+            Persona per = (Persona) authentication.getPrincipal();
+            String accessonToken = jwtUtil.generateAccessToken(p);
+            AuthResponse response = new AuthResponse(per.getPerEmail(), accessonToken);
+            
+            return new ResponseEntity<>(response, HttpStatus.OK);
         }else{
             return new ResponseEntity<>("Usuario o contraseña incorrectos!", HttpStatus.NOT_FOUND);
         }

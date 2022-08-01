@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.RequestHeader;
-
 import com.bit.proyecto.dao.ZapatoDao;
 import com.bit.proyecto.exception.ZapatoException;
 import com.bit.proyecto.modelo.Zapato;
