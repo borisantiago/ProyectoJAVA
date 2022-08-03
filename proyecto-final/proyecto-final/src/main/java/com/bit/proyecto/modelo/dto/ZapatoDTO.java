@@ -10,6 +10,7 @@ public class ZapatoDTO {
     private String zapTalla;
     private Integer zapStock;
     private Double zapPrecio;
+    private String zapImagen;
    
     public ZapatoDTO() {
     }
@@ -19,7 +20,7 @@ public class ZapatoDTO {
     }
 
     public ZapatoDTO(String zapCodigo, String zapNombre, String zapModelo, String zapGenero, String zapColor,
-            String zapTalla, Integer zapStock, Double zapPrecio) {
+            String zapTalla, Integer zapStock, Double zapPrecio, String zapImagen) {
         this.zapCodigo = zapCodigo;
         this.zapNombre = zapNombre;
         this.zapModelo = zapModelo;
@@ -28,6 +29,7 @@ public class ZapatoDTO {
         this.zapTalla = zapTalla;
         this.zapStock = zapStock;
         this.zapPrecio = zapPrecio;
+        this.zapImagen = zapImagen; 
     }
 
     public String getZapCodigo() {
@@ -92,6 +94,14 @@ public class ZapatoDTO {
 
     public void setZapPrecio(Double zapPrecio) {
         this.zapPrecio = zapPrecio;
+    }
+
+    public String getZapImagen() {
+        return zapImagen;
+    }
+
+    public void setZapImagen(String zapImagen) {
+        this.zapImagen = zapImagen;
     }
 
     

@@ -32,7 +32,7 @@ public class SpringRestTest {
 
     @Before
     public void init() {
-        Zapato zapato = new Zapato("1", "Reebok", "Atleta", "F", "Gris", "38", 99, 55.0);
+        Zapato zapato = new Zapato("1", "Reebok", "Atleta", "F", "Gris", "38", 99, 55.0, "1");
         Mockito.when(mockRepository.findById("1")).thenReturn(Optional.of(zapato));
     }
 

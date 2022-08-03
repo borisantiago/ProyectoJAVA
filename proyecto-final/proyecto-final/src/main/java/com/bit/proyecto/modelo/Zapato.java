@@ -40,6 +40,8 @@ public class Zapato {
     @Basic(optional = false)
     @Column(name = "ZAP_STOCK")
     private Integer zapStock;
+    @Column(name="imagen")
+    private String zapImagen;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "ZAP_PRECIO")
     private Double zapPrecio;
@@ -75,7 +77,7 @@ public class Zapato {
     }
 
     public Zapato(String zapCodigo, String zapNombre, String zapModelo, String zapGenero, String zapColor, 
-            String zapTalla, Integer zapStock, Double zapPrecio) {
+            String zapTalla, Integer zapStock, Double zapPrecio, String zapImagen) {
         this.zapCodigo = zapCodigo;
         this.zapNombre = zapNombre;
         this.zapModelo = zapModelo;
@@ -84,6 +86,7 @@ public class Zapato {
         this.zapTalla = zapTalla;
         this.zapStock = zapStock;
         this.zapPrecio = zapPrecio;
+        this.zapImagen = zapImagen;
 
     }
 
@@ -149,6 +152,14 @@ public class Zapato {
 
     public void setZapPrecio(Double zapPrecio) {
         this.zapPrecio = zapPrecio;
+    }
+
+    public String getZapImagen() {
+        return zapImagen;
+    }
+
+    public void setZapImagen(String zapImagen) {
+        this.zapImagen = zapImagen;
     }
 
     // public Integer getCarCodigo() {

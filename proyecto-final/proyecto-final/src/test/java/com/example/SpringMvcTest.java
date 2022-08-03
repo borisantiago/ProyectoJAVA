@@ -36,7 +36,7 @@ public class SpringMvcTest {
 
     @Before
     public void init() {
-        Zapato zapato = new Zapato("100", "Reebok", "Casuales", "M", "Gris", "40", 9, 60.0);
+        Zapato zapato = new Zapato("100", "Reebok", "Casuales", "M", "Gris", "40", 9, 60.0, "imagen");
         Mockito.when(mockRepository.findById("1")).thenReturn(Optional.of(zapato));
     }
 

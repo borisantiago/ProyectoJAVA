@@ -82,7 +82,7 @@ public class ZapatoRepository {
     public List<ZapatoDTO> listarZapatosDTO(){
         List<ZapatoDTO> dtos = new ArrayList<>();
         for(Zapato z: repository.findAll()){
-            dtos.add(new ZapatoDTO(z.getZapCodigo(), z.getZapNombre(), z.getZapModelo(), z.getZapGenero(), z.getZapColor(), z.getZapTalla(), z.getZapStock(), z.getZapPrecio()));
+            dtos.add(new ZapatoDTO(z.getZapCodigo(), z.getZapNombre(), z.getZapModelo(), z.getZapGenero(), z.getZapColor(), z.getZapTalla(), z.getZapStock(), z.getZapPrecio(), z.getZapImagen()));
         }
         return  dtos;
     }
@@ -119,12 +119,12 @@ public class ZapatoRepository {
 
     private ZapatoDTO getDTO(Zapato z){
         return new ZapatoDTO(z.getZapCodigo(), z.getZapNombre(), z.getZapModelo(), z.getZapGenero(), z.getZapColor(), 
-            z.getZapTalla(), z.getZapStock(), z.getZapPrecio());
+            z.getZapTalla(), z.getZapStock(), z.getZapPrecio(), z.getZapImagen());
     }
 
     private Zapato getEntidad(ZapatoDTO z){
         return new Zapato(z.getZapCodigo(), z.getZapNombre(), z.getZapModelo(), z.getZapGenero(), z.getZapColor(), 
-            z.getZapTalla(), z.getZapStock(), z.getZapPrecio());
+            z.getZapTalla(), z.getZapStock(), z.getZapPrecio(), z.getZapImagen());
     }
 
 
