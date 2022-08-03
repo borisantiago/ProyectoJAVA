@@ -25,7 +25,7 @@ public class PersonaController {
     @Autowired
     private PersonaRepository repository;
 
-    @PostMapping("/loginPersona")
+    @PostMapping("/login")
     public ResponseEntity<?> loginProfesor(@RequestBody Persona p){
         Persona personaDB = repository.loginPersona(p);
         
