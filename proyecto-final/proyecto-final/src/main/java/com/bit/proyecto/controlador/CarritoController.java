@@ -6,6 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+<<<<<<< HEAD
+=======
+import org.springframework.web.bind.annotation.DeleteMapping;
+>>>>>>> RespladoSinJWT
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -56,7 +60,13 @@ public class CarritoController {
         return new ResponseEntity<>(per, HttpStatus.OK);
     }
 
+    @DeleteMapping("/eliminar/{id}")
+    public ResponseEntity<?> eliminarObjetoCarrito(@PathVariable("id") Integer id){
+        
+        repository.eliminarCarrito(id);
+        return new ResponseEntity<>("Se elimino correctamente", HttpStatus.OK);
 
+    }
     
 
 }

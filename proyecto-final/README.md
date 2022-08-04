@@ -27,7 +27,7 @@
 >>*Agregar:* (necesita zapCodigo y perCodigo (Existencia de ambos)) localhost:8080/carrito/agregar 
 >>*Ver carritos de cliente:* localhost:8080/carrito/todos
 >>*Ver que tiene el carrito una persona:* localhost:8080/carrito/cliente/1
->>
+>>*Eliminar objeto del carrito una persona:* localhost:8080/carrito/cliente/1
 
 >Pedido
 >>*Ver todos los pedidos:* localhost:8080/pedido/todos
