@@ -85,7 +85,7 @@
 		</dependency>
 
 
-        <dependency>
+        <!-- <dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
 			<version>5.6.3</version>
@@ -99,7 +99,7 @@
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
             <version>0.9.1</version>
-        </dependency>
+        </dependency> -->
         
         
     
